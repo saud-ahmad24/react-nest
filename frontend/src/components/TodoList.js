@@ -2,11 +2,13 @@ import React, { useContext, useEffect, useState } from 'react';
 import { fetchTodos, createTodo, updateTodo, deleteTodo } from '../services/todoService';
 import AuthContext from '../context/AuthContext';
 import TodoItem from './TodoItem';
+import './TodoItem'; // Ensure you have your CSS file for styling
 
 const TodoList = () => {
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser, handleLogout } = useContext(AuthContext);
   const [todos, setTodos] = useState([]);
-  const [newTodo, setNewTodo] = useState('');
+  const [newTitle, setNewTitle] = useState('');
+  const [newDescription, setNewDescription] = useState('');
 
   useEffect(() => {
     const loadTodos = async () => {
@@ -17,13 +19,18 @@ const TodoList = () => {
   }, []);
 
   const handleCreateTodo = async () => {
-    const response = await createTodo({ text: newTodo });
+    if (!newTitle.trim() || !newDescription.trim()) {
+      alert('Both title and description are required');
+      return;
+    }
+    const response = await createTodo({ title: newTitle, description: newDescription });
     setTodos([...todos, response.data]);
-    setNewTodo('');
+    setNewTitle('');
+    setNewDescription('');
   };
 
-  const handleUpdateTodo = async (id, updatedText) => {
-    const response = await updateTodo(id, { text: updatedText });
+  const handleUpdateTodo = async (id, updatedTitle, updatedDescription) => {
+    const response = await updateTodo(id, { title: updatedTitle, description: updatedDescription });
     setTodos(todos.map(todo => (todo._id === id ? response.data : todo)));
   };
 
@@ -33,21 +40,30 @@ const TodoList = () => {
   };
 
   return (
-    <div>
+    <div className="todo-list">
       <h2>Todo List</h2>
+      <button onClick={handleLogout} className="logout-button">Logout</button>
       {currentUser?.role === 'admin' && (
-        <div>
+        <div className="todo-form">
           <input 
             type="text" 
-            value={newTodo} 
-            onChange={(e) => setNewTodo(e.target.value)} 
-            placeholder="New Todo" 
+            value={newTitle} 
+            onChange={(e) => setNewTitle(e.target.value)} 
+            placeholder="Todo Title" 
+            className="todo-input"
           />
-          <button onClick={handleCreateTodo}>Add Todo</button>
+          <input 
+            type="text" 
+            value={newDescription} 
+            onChange={(e) => setNewDescription(e.target.value)} 
+            placeholder="Todo Description" 
+            className="todo-input"
+          />
+          <button onClick={handleCreateTodo} className="todo-button">Add Todo</button>
         </div>
       )}
 
-      <ul>
+      <ul className="todo-list-items">
         {todos.map(todo => (
           <TodoItem
             key={todo._id}

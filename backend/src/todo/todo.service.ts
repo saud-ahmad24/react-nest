@@ -13,7 +13,8 @@ export class TodoService {
   }
 
   async getTodos(user: any) {
-    if (user.role === 'admin') {
+    console.log(user)
+    if (user.role === 'user') {
       return this.todoModel.find().exec();
     } else {
       return this.todoModel.find({ createdBy: user.email }).exec();

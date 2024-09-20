@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { refreshToken } from './authService';
 
-const API_URL = 'http://localhost:5000/api/todos';
+const API_URL = 'http://localhost:5000/todos';
 
 const getAuthHeader = () => {
   const user = JSON.parse(localStorage.getItem('user'));
@@ -14,13 +14,23 @@ axios.interceptors.response.use(
     const originalRequest = error.config;
     if (error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
-      const newAccessToken = await refreshToken();
-      axios.defaults.headers.common['Authorization'] = 'Bearer ' + newAccessToken;
-      return axios(originalRequest);
+      try {
+        const newAccessToken = await refreshToken();
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + newAccessToken;
+        return axios(originalRequest);
+      } catch (err) {
+        // Handle refresh token failure (e.g., logout user)
+        logout();
+        window.location.reload(); // Redirect to login or handle as needed
+      }
     }
     return Promise.reject(error);
   }
 );
+
+const logout = () => {
+  localStorage.removeItem('user');
+};
 
 const fetchTodos = async () => {
   return await axios.get(API_URL, { headers: getAuthHeader() });
