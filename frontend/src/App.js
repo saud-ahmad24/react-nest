@@ -5,13 +5,13 @@ import Login from './components/Login';
 import AuthContext from './context/AuthContext';
 
 function App() {
-  // const { currentUser } = useContext(AuthContext);
+  const { currentUser } = useContext(AuthContext);
   
   return (
     <AuthProvider>
       <div className="App">
-        <Login/>
-        {/* {!currentUser ? <Login /> : <TodoList />} */}
+        {/* <Login/> */}
+        {!currentUser ? <Login /> : <TodoList />}
       </div>
     </AuthProvider>
   );
