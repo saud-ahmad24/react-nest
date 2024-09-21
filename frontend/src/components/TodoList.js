@@ -38,42 +38,47 @@ const TodoList = () => {
     await deleteTodo(id);
     setTodos(todos.filter(todo => todo._id !== id));
   };
-
   return (
-    <div className="todo-list">
-      <h2>Todo List</h2>
-      <button onClick={handleLogout} className="logout-button">Logout</button>
-      {currentUser?.role === 'admin' && (
-        <div className="todo-form">
-          <input 
-            type="text" 
-            value={newTitle} 
-            onChange={(e) => setNewTitle(e.target.value)} 
-            placeholder="Todo Title" 
-            className="todo-input"
-          />
-          <input 
-            type="text" 
-            value={newDescription} 
-            onChange={(e) => setNewDescription(e.target.value)} 
-            placeholder="Todo Description" 
-            className="todo-input"
-          />
-          <button onClick={handleCreateTodo} className="todo-button">Add Todo</button>
-        </div>
-      )}
+    <div className="todo-page">
+      <div className="user-info">
+        <span>Welcome, {currentUser?.email}</span>
+        <button onClick={handleLogout} className="logout-button">Logout</button>
+      </div>
+      
+      <div className="todo-list">
+        <h2>Todo List</h2>
+        {currentUser?.role === 'admin' && (
+          <div className="todo-form">
+            <input 
+              type="text" 
+              value={newTitle} 
+              onChange={(e) => setNewTitle(e.target.value)} 
+              placeholder="Todo Title" 
+              className="todo-input"
+            />
+            <input 
+              type="text" 
+              value={newDescription} 
+              onChange={(e) => setNewDescription(e.target.value)} 
+              placeholder="Todo Description" 
+              className="todo-input"
+            />
+            <button onClick={handleCreateTodo} className="todo-button">Add Todo</button>
+          </div>
+        )}
 
-      <ul className="todo-list-items">
-        {todos.map(todo => (
-          <TodoItem
-            key={todo._id}
-            todo={todo}
-            canEdit={currentUser?.role === 'admin'}
-            onUpdate={handleUpdateTodo}
-            onDelete={handleDeleteTodo}
-          />
-        ))}
-      </ul>
+        <ul className="todo-list-items">
+          {todos.map(todo => (
+            <TodoItem
+              key={todo._id}
+              todo={todo}
+              canEdit={currentUser?.role === 'admin'}
+              onUpdate={handleUpdateTodo}
+              onDelete={handleDeleteTodo}
+            />
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };

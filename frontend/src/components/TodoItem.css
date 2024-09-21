@@ -1,70 +1,161 @@
-/* TodoItem.css */
+.todo-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user-info {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  background-color: #f7f9fc;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.user-info span {
+  font-size: 1rem;
+  color: #34495e;
+}
+
+.logout-button {
+  background-color: #e74c3c;
+  color: #ffffff;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+  background-color: #c0392b;
+}
+
+/* Todo List Box */
+.todo-list {
+  width: 50%;
+  margin: 2rem auto;
+  padding: 1rem;
+  background-color: #f7f9fc;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  text-align: center;
+  font-size: 2rem;
+  color: #34495e;
+  margin-bottom: 1.5rem;
+}
+
+
+h2 {
+  text-align: center;
+  font-size: 2rem;
+  color: #34495e;
+  margin-bottom: 1.5rem;
+}
+
+.logout-button {
+  background-color: #e74c3c;
+  color: #ffffff;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  float: right;
+}
+
+.logout-button:hover {
+  background-color: #c0392b;
+}
+
+.todo-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.todo-input {
+  padding: 0.8rem;
+  border: 1px solid #bdc3c7;
+  border-radius: 5px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.todo-input:focus {
+  border-color: #2980b9;
+  box-shadow: 0 0 8px rgba(41, 128, 185, 0.3);
+}
+
+.todo-button {
+  padding: 0.75rem;
+  background-color: #2ecc71;
+  color: #fff;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.todo-button:hover {
+  background-color: #27ae60;
+}
+
+.todo-list-items {
+  list-style-type: none;
+  padding: 0;
+}
+
 .todo-item {
-    background: #ffffff;
-    border-radius: 10px;
-    padding: 1rem;
-    margin: 0.5rem 0;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s;
-  }
-  
-  .todo-item:hover {
-    transform: scale(1.02);
-  }
-  
-  .todo-edit {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .todo-input {
-    padding: 0.8rem;
-    margin: 0.5rem 0;
-    border: 1px solid #dddddd;
-    border-radius: 5px;
-    outline: none;
-    transition: border-color 0.3s ease;
-  }
-  
-  .todo-input:focus {
-    border-color: #3498db;
-    box-shadow: 0 0 8px rgba(52, 152, 219, 0.2);
-  }
-  
-  .todo-button {
-    padding: 0.6rem;
-    margin-top: 0.5rem;
-    background-color: #3498db;
-    color: #ffffff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .todo-button:hover {
-    background-color: #2980b9;
-  }
-  
-  .todo-display {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .todo-title {
-    font-size: 1.2rem;
-    font-weight: bold;
-    margin: 0;
-  }
-  
-  .todo-description {
-    margin: 0;
-    color: #666666;
-  }
-  
-  .todo-actions {
-    display: flex;
-    gap: 0.5rem;
-  }
-  
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 1.25rem;
+  margin: 1rem 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.todo-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.todo-display {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.todo-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.todo-description {
+  font-size: 1rem;
+  color: #7f8c8d;
+  margin-top: 0.5rem;
+}
+
+.todo-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.todo-actions button {
+  background-color: #f39c12;
+  border: none;
+  color: white
+}

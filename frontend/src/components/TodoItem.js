@@ -10,6 +10,12 @@ const TodoItem = ({ todo, canEdit, onUpdate, onDelete }) => {
     setIsEditing(true);
   };
 
+  const handleCancel = () => {
+    setIsEditing(false);
+    setUpdatedTitle(todo.title);
+    setUpdatedDescription(todo.description);
+  };
+
   const handleSave = () => {
     if (!updatedTitle.trim() || !updatedDescription.trim()) {
       alert('Both title and description are required');
@@ -37,7 +43,10 @@ const TodoItem = ({ todo, canEdit, onUpdate, onDelete }) => {
             className="todo-input"
             placeholder="Description"
           />
-          <button onClick={handleSave} className="todo-button">Save</button>
+          <div className="todo-actions">
+            <button onClick={handleSave} className="todo-button save">Save</button>
+            <button onClick={handleCancel} className="todo-button cancel">Cancel</button>
+          </div>
         </div>
       ) : (
         <div className="todo-display">
@@ -45,8 +54,8 @@ const TodoItem = ({ todo, canEdit, onUpdate, onDelete }) => {
           <p className="todo-description">{todo.description}</p>
           {canEdit && (
             <div className="todo-actions">
-              <button onClick={handleEdit} className="todo-button">Edit</button>
-              <button onClick={() => onDelete(todo._id)} className="todo-button">Delete</button>
+              <button onClick={handleEdit} className="todo-button edit">Edit</button>
+              <button onClick={() => onDelete(todo._id)} className="todo-button delete">Delete</button>
             </div>
           )}
         </div>

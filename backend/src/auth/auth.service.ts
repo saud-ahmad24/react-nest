@@ -31,7 +31,8 @@ export class AuthService {
         return {
             accessToken,
             refreshToken,
-            role: user.role
+            role: user.role,
+            email: user.email
         };
     }
 
@@ -58,7 +59,8 @@ export class AuthService {
             return {
                 accessToken: newAccessToken,
                 refreshToken: newRefreshToken,
-                role: user.role
+                role: user.role,
+                email: user.email
             };
         } catch (error) {
             throw new UnauthorizedException('Could not refresh token');
