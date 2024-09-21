@@ -10,7 +10,7 @@ export class TodoController {
   @Post()
   async createTodo(@Body() body: any, @Req() req: any) {
     const { title, description } = body;
-    return this.todoService.createTodo(title, description, req.user.email);
+    return this.todoService.createTodo(title, description, req.user);
   }
 
   @UseGuards(JwtAuthGuard)
