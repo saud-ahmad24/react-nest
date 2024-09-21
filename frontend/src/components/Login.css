@@ -64,3 +64,15 @@
     background-color: #2980b9;
   }
   
+
+  .error-message {
+    color: red;
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  
+  .form-input:invalid {
+    border-color: red;
+  }
+  

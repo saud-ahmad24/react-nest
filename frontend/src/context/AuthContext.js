@@ -5,6 +5,7 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
+  const [authError, setAuthError] = useState(null);
 
   useEffect(() => {
     const user = getCurrentUser();
@@ -14,16 +15,23 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const handleLogin = async (email, password) => {
-    const user = await login(email, password);
-    setCurrentUser(user);
+    setAuthError(null);
+    try {
+      const user = await login(email, password);
+      setCurrentUser(user);
+    } catch (error) {
+      setAuthError(error.response?.data?.message || 'Login failed'); 
+    }
   };
 
   const handleLogout = () => {
     logout();
     setCurrentUser(null);
+    setAuthError(null); 
   };
+
   return (
-    <AuthContext.Provider value={{ currentUser, handleLogin, handleLogout }}>
+    <AuthContext.Provider value={{ currentUser, handleLogin, handleLogout, authError }}>
       {children}
     </AuthContext.Provider>
   );

@@ -3,7 +3,7 @@ import AuthContext from '../context/AuthContext';
 import './Login.css'; // Import the CSS file for custom styling
 
 const Login = () => {
-  const { handleLogin } = useContext(AuthContext);
+  const { handleLogin, authError } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -16,6 +16,7 @@ const Login = () => {
     <div className="login-container">
       <div className="login-form">
         <h2 className="login-title">Login</h2>
+        {authError && <div className="error-message">{authError}</div>}
         <form onSubmit={onSubmit}>
           <div className="form-group">
             <label>Email:</label>
