@@ -23,8 +23,14 @@ export class AuthService {
 
     async login(user: any) {
         const payload = { email: user.email, sub: user._id, role: user.role };
+        const accessToken = this.jwtService.sign(payload, { expiresIn: '15m' });
+        const refreshToken = this.jwtService.sign(payload, { expiresIn: '7d' });
+
+        await this.userModel.updateOne({ _id: user._id }, { refreshToken });
+
         return {
-            accessToken: this.jwtService.sign(payload),
+            accessToken,
+            refreshToken,
             role: user.role
         };
     }
@@ -35,16 +41,28 @@ export class AuthService {
         return user.save();
     }
 
-    async refreshToken(userId: string) {
-        const user = await this.userModel.findById(userId); // Fetch user by ID
-        if (!user) {
-            throw new Error('User not found');
+    async refreshToken(oldRefreshToken: string) {
+        try {
+            const decoded = this.jwtService.verify(oldRefreshToken);
+
+            const user: any = await this.userModel.findById(decoded.sub);
+            if (!user || user.refreshToken !== oldRefreshToken) {
+                throw new UnauthorizedException('Invalid refresh token');
+            }
+
+            const payload = { email: user.email, sub: user._id, role: user.role };
+            const newAccessToken = this.jwtService.sign(payload, { expiresIn: '15m' });
+            const newRefreshToken = this.jwtService.sign(payload, { expiresIn: '7d' });
+
+            await this.userModel.updateOne({ _id: user._id }, { refreshToken: newRefreshToken });
+            return {
+                accessToken: newAccessToken,
+                refreshToken: newRefreshToken,
+                role: user.role
+            };
+        } catch (error) {
+            throw new UnauthorizedException('Could not refresh token');
         }
-        const payload = { email: user.email, sub: user._id };
-        return {
-            accessToken: this.jwtService.sign(payload),
-            refreshToken: this.jwtService.sign(payload, { expiresIn: '7d' }),
-        };
     }
 
 }

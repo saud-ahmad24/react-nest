@@ -11,6 +11,9 @@ export class User {
   @Prop({ required: true })
   password: string;
 
+  @Prop({ required: false })
+  refreshToken: string;
+
   @Prop({ required: true, enum: ['admin', 'user'], default: 'user' })
   role: string;
 }

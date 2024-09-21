@@ -13,7 +13,6 @@ export class TodoService {
   }
 
   async getTodos(user: any) {
-    console.log(user)
     if (user.role === 'user') {
       return this.todoModel.find().exec();
     } else {

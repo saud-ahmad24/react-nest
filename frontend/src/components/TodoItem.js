@@ -11,6 +11,10 @@ const TodoItem = ({ todo, canEdit, onUpdate, onDelete }) => {
   };
 
   const handleSave = () => {
+    if (!updatedTitle.trim() || !updatedDescription.trim()) {
+      alert('Both title and description are required');
+      return;
+    }
     onUpdate(todo._id, updatedTitle, updatedDescription);
     setIsEditing(false);
   };
@@ -19,17 +23,17 @@ const TodoItem = ({ todo, canEdit, onUpdate, onDelete }) => {
     <li className="todo-item">
       {isEditing ? (
         <div className="todo-edit">
-          <input 
-            type="text" 
-            value={updatedTitle} 
-            onChange={(e) => setUpdatedTitle(e.target.value)} 
+          <input
+            type="text"
+            value={updatedTitle}
+            onChange={(e) => setUpdatedTitle(e.target.value)}
             className="todo-input"
             placeholder="Title"
           />
-          <input 
-            type="text" 
-            value={updatedDescription} 
-            onChange={(e) => setUpdatedDescription(e.target.value)} 
+          <input
+            type="text"
+            value={updatedDescription}
+            onChange={(e) => setUpdatedDescription(e.target.value)}
             className="todo-input"
             placeholder="Description"
           />

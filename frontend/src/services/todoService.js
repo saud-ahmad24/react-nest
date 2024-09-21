@@ -17,11 +17,11 @@ axios.interceptors.response.use(
       try {
         const newAccessToken = await refreshToken();
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + newAccessToken;
+        originalRequest.headers['Authorization'] = 'Bearer ' + newAccessToken;
         return axios(originalRequest);
       } catch (err) {
-        // Handle refresh token failure (e.g., logout user)
         logout();
-        window.location.reload(); // Redirect to login or handle as needed
+        window.location.reload();
       }
     }
     return Promise.reject(error);

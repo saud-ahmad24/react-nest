@@ -22,7 +22,6 @@ export const AuthProvider = ({ children }) => {
     logout();
     setCurrentUser(null);
   };
-  console.log(currentUser)
   return (
     <AuthContext.Provider value={{ currentUser, handleLogin, handleLogout }}>
       {children}
