@@ -7,7 +7,7 @@ async function bootstrap() {
   app.use((req, res, next) => {
     res.setHeader(
       "Access-Control-Allow-Origin",
-      "https://react-frontend-gray-five.vercel.app"
+      "*"
     );
     res.setHeader(
       "Access-Control-Allow-Methods",
@@ -24,12 +24,12 @@ async function bootstrap() {
 
     next();
   });
-  app.enableCors({
-    origin: 'https://react-frontend-gray-five.vercel.app',
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true,
-    allowedHeaders: ['Content-Type', 'Authorization'],
-  });
+  // app.enableCors({
+  //   origin: 'https://react-frontend-gray-five.vercel.app',
+  //   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  //   credentials: true,
+  //   allowedHeaders: ['Content-Type', 'Authorization'],
+  // });
 
   await app.listen(port);
 }
