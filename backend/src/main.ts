@@ -8,8 +8,8 @@ async function bootstrap() {
     origin: 'https://react-frontend-gray-five.vercel.app',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
-    allowedHeaders: '*',
-  })
+    allowedHeaders: ['Content-Type', 'Authorization'],
+  });  
   await app.listen(port);
 }
 bootstrap();

@@ -3,7 +3,7 @@ import axios from 'axios';
 const API_URL = 'https://back-nest-navy.vercel.app/auth';
 
 const login = async (email, password) => {
-  const response = await axios.post(`${API_URL}/login`, { email, password }, { withCredentials: true});
+  const response = await axios.post(`${API_URL}/login`, { email, password }, { withCredentials: true });
   if (response.data.accessToken) {
     localStorage.setItem('user', JSON.stringify(response.data));
   }
