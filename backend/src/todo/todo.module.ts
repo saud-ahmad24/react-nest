@@ -8,7 +8,7 @@ import { AuthModule } from '../auth/auth.module'; // Import AuthModule to access
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: Todo.name, schema: TodoSchema }]),
-    AuthModule, // Ensure AuthModule is imported
+    AuthModule,
   ],
   controllers: [TodoController],
   providers: [TodoService],

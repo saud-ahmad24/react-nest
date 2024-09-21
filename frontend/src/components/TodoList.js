@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { fetchTodos, createTodo, updateTodo, deleteTodo } from '../services/todoService';
 import AuthContext from '../context/AuthContext';
 import TodoItem from './TodoItem';
-import './TodoItem'; // Ensure you have your CSS file for styling
+import './TodoItem';
 
 const TodoList = () => {
   const { currentUser, handleLogout } = useContext(AuthContext);

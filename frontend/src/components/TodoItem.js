@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './TodoItem.css'; // Importing the CSS file for styling
+import './TodoItem.css';
 
 const TodoItem = ({ todo, canEdit, onUpdate, onDelete }) => {
   const [isEditing, setIsEditing] = useState(false);

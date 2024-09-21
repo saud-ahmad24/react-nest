@@ -9,12 +9,12 @@ import { AuthController } from './auth.controller'; // Import the AuthController
   imports: [
     MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
     JwtModule.register({
-      secret: 'your-secret-key', // Use an environment variable in production
+      secret: 'SHAHSAUD!@#$%^^^^asxzzzzzz',
       signOptions: { expiresIn: '1h' },
     }),
   ],
   providers: [AuthService],
-  controllers: [AuthController], // Add the AuthController here
+  controllers: [AuthController],
   exports: [AuthService, JwtModule],
 })
 export class AuthModule {}

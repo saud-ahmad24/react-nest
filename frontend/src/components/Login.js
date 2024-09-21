@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import AuthContext from '../context/AuthContext';
-import './Login.css'; // Import the CSS file for custom styling
+import './Login.css';
 
 const Login = () => {
   const { handleLogin, authError } = useContext(AuthContext);
