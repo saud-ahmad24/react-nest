@@ -5,7 +5,7 @@ import { TodoModule } from './todo/todo.module';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb+srv://saudahmad24:v6FhgG0UPO3o1mbs@cluster0.gezq8.mongodb.net/'),
+    MongooseModule.forRoot('mongodb+srv://saudahmad24:v6FhgG0UPO3o1mbs@cluster0.gezq8.mongodb.net/todoAppSaud'),
     AuthModule,
     TodoModule,
   ],
