@@ -11,8 +11,6 @@ export class Todo {
   @Prop()
   description: string;
 
-  @Prop({ default: false })
-  completed: boolean;
 
   @Prop({ required: true })
   createdBy: string;

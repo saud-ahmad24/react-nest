@@ -37,10 +37,17 @@ export class AuthService {
     }
 
     async register(email: string, password: string, role: string = 'user') {
+        
+        const existingUser = await this.userModel.findOne({ email });
+        if (existingUser) {
+            throw new Error('User already exists with this email');
+        }
         const hashedPassword = await bcrypt.hash(password, 10);
+
         const user = new this.userModel({ email, password: hashedPassword, role });
         return user.save();
     }
+    
 
     async refreshToken(oldRefreshToken: string) {
         try {
